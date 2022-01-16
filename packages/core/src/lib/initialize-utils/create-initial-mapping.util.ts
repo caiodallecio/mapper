@@ -71,7 +71,11 @@ export function createInitialMapping(
     prePropertiesLoop(mapping);
   }
 
-  const destinationPaths = getPathRecursive(destinationObj) || [];
+  const destinationPaths = (getPathRecursive(destinationObj) || []).filter(
+    (path) =>
+      destinationNestedMetadataMap.some((dest) => dest[0][0] === path[0])
+  );
+
   const namingConventions = mapping[MappingClassId.namingConventions];
   for (
     let i = 0, destinationPathsLen = destinationPaths.length;
