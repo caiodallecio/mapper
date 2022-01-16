@@ -269,6 +269,13 @@ Original error: ${originalError}`;
         continue;
       }
 
+      // if source and destination are the same type
+      if (nestedDestinationMemberKey === nestedSourceMemberKey)
+      {
+        setMember(() => mapInitializedValue);
+        continue
+      }
+
       // if is object
       if (typeof mapInitializedValue === 'object') {
         const nestedMapping = mapper.getMapping(
